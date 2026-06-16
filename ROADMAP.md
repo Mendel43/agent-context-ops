@@ -2,9 +2,9 @@
 
 ## v0.1 - Public skeleton
 
-- Publish README, license, examples and architecture notes.
-- Add a safe sample configuration.
-- Document what must never be exported.
+- Publish README, license, examples and architecture notes. Done.
+- Add a safe sample configuration. Done.
+- Document what must never be exported. Done.
 
 ## v0.2 - Context pack generator
 

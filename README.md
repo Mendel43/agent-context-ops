@@ -1,6 +1,13 @@
 # Agent Context Ops
 
-Open-source toolkit for keeping AI coding agents grounded in real project context.
+[![CI](https://github.com/Mendel43/agent-context-ops/actions/workflows/ci.yml/badge.svg)](https://github.com/Mendel43/agent-context-ops/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+Stop pasting messy context between AI coding agents.
+
+Agent Context Ops is an open-source toolkit for keeping AI coding agents grounded
+in real project context.
 
 Agent Context Ops helps maintainers share durable context across tools such as Codex,
 Claude Code, Hermes, Obsidian and local knowledge graphs without copying private
@@ -42,6 +49,8 @@ This project is designed for real-world maintainer workflows:
 
 ## Install
 
+From a local checkout:
+
 ```bash
 pip install -e .
 ```
@@ -53,6 +62,8 @@ Generate a redacted handoff for another AI agent:
 ```bash
 agent-context-ops context-pack --root . --output handoff.md
 ```
+
+See a sample output: [`examples/output/context-pack.md`](examples/output/context-pack.md).
 
 Check if a local knowledge graph is stale:
 
@@ -104,5 +115,5 @@ make scan
 
 ## Status
 
-Early extraction from a private production workflow. The first public release should
-ship as a clean, generic CLI with examples and no private project assumptions.
+`v0.1.0` is the first public release: a clean, generic CLI with examples, tests,
+CI, security docs, and no private project assumptions.
