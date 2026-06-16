@@ -1,0 +1,25 @@
+[context]
+include = [
+  "README.md",
+  "ROADMAP.md",
+  "AGENTS.md",
+  "CLAUDE.md",
+  "docs",
+  "examples",
+  "pyproject.toml",
+]
+exclude = [
+  ".git",
+  ".venv",
+  "venv",
+  "node_modules",
+  "__pycache__",
+  "dist",
+  "build",
+  "private",
+  "secrets",
+  "graphify-out",
+]
+max_file_bytes = 20000
+max_total_bytes = 180000
+

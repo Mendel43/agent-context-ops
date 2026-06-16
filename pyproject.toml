@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-context-ops"
+version = "0.1.0"
+description = "Safe context handoffs, Obsidian logs, backup checks, and graph freshness checks for AI-assisted maintainers."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+  { name = "Agent Context Ops contributors" }
+]
+keywords = ["ai-agents", "codex", "claude", "obsidian", "maintenance", "handoff"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Software Development :: Documentation",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = []
+
+[project.scripts]
+agent-context-ops = "agent_context_ops.cli:main"
+aco = "agent_context_ops.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
