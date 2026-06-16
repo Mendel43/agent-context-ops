@@ -22,4 +22,4 @@ exclude = [
 ]
 max_file_bytes = 20000
 max_total_bytes = 180000
-
+show_absolute_root = false

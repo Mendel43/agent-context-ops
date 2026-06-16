@@ -24,6 +24,7 @@ exclude = [
 ]
 max_file_bytes = 20000
 max_total_bytes = 180000
+show_absolute_root = false
 """
 
 
@@ -51,4 +52,3 @@ def init_project(root: Path, force: bool = False) -> list[Path]:
         path.write_text(content, encoding="utf-8")
         written.append(path)
     return written
-

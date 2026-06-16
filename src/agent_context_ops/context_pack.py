@@ -40,6 +40,7 @@ class ContextConfig:
     exclude: set[str] = field(default_factory=lambda: set(DEFAULT_EXCLUDES))
     max_file_bytes: int = 20_000
     max_total_bytes: int = 180_000
+    show_absolute_root: bool = False
 
     @classmethod
     def from_file(cls, path: Path | None) -> "ContextConfig":
@@ -52,6 +53,7 @@ class ContextConfig:
             exclude=set(context.get("exclude", DEFAULT_EXCLUDES)),
             max_file_bytes=int(context.get("max_file_bytes", 20_000)),
             max_total_bytes=int(context.get("max_total_bytes", 180_000)),
+            show_absolute_root=bool(context.get("show_absolute_root", False)),
         )
 
 
@@ -61,7 +63,7 @@ def build_context_pack(root: Path, config: ContextConfig) -> str:
     chunks.append("# Agent Context Pack")
     chunks.append("")
     chunks.append(f"- Generated: `{datetime.now(timezone.utc).isoformat()}`")
-    chunks.append(f"- Root: `{root}`")
+    chunks.append(f"- Root: `{_display_root(root, config)}`")
     chunks.append("")
     chunks.append("## Git")
     chunks.append("")
@@ -94,6 +96,12 @@ def build_context_pack(root: Path, config: ContextConfig) -> str:
         total += len(section.encode("utf-8"))
         chunks.append(section)
     return "\n".join(chunks).rstrip() + "\n"
+
+
+def _display_root(root: Path, config: ContextConfig) -> str:
+    if config.show_absolute_root:
+        return str(root)
+    return root.name or "."
 
 
 def _iter_included_files(root: Path, config: ContextConfig) -> list[Path]:
@@ -142,4 +150,3 @@ def _git_summary(root: Path) -> str:
         return "Not a git repository yet."
     output = status.stdout.strip()
     return f"```text\n{output or 'clean'}\n```"
-

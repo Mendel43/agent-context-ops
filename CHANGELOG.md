@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.1.1 - 2026-06-16
+
+Documentation and demo polish for the first public release.
+
+### Added
+
+- `doctor` command for local readiness checks before sharing context.
+- Demo screenshot/GIF assets for the README.
+- v0.1.1 release notes.
+
+### Changed
+
+- Improved README structure, quick start and command table.
+- Expanded CLI reference and demo docs.
+- Updated release checklist to include doctor and demo asset checks.
+- Hid absolute local root paths in context packs by default.
+
 ## v0.1.0 - 2026-06-15
 
 First public release.
@@ -14,4 +31,3 @@ First public release.
 - `scan-secrets` for secret-looking content checks.
 - `council-log` for read-only multi-agent review logs.
 - CI, tests, security docs, examples, and smoke tests.
-

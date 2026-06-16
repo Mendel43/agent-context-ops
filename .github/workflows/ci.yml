@@ -18,3 +18,4 @@ jobs:
       - run: PYTHONPATH=src python scripts/smoke.py
       - run: pytest -q
       - run: agent-context-ops --help
+      - run: agent-context-ops doctor --root .

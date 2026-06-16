@@ -14,3 +14,10 @@ def test_context_pack_skips_env_and_redacts(tmp_path: Path):
     assert ".env" not in output
     assert "secretsecret" not in output  # allow-secret
     assert "<REDACTED>" in output
+
+
+def test_context_pack_hides_absolute_root_by_default(tmp_path: Path):
+    (tmp_path / "README.md").write_text("hello\n", encoding="utf-8")
+    output = build_context_pack(tmp_path, ContextConfig(include=["README.md"]))
+    assert str(tmp_path) not in output
+    assert f"Root: `{tmp_path.name}`" in output

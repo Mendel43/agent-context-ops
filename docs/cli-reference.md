@@ -8,6 +8,22 @@ Generates a redacted Markdown handoff.
 agent-context-ops context-pack --root . --output handoff.md
 ```
 
+By default, `context-pack` hides the absolute local root path and reports only
+the project folder name. Use `--show-root-path` only when the receiving agent
+needs the exact local path on the same machine.
+
+## `doctor`
+
+Runs a local readiness check before sharing context with another agent.
+
+```bash
+agent-context-ops doctor --root .
+```
+
+The doctor checks whether the root exists, whether a config file is present,
+whether secret-looking content is visible, whether a context pack can be built,
+whether the graph output is fresh, and whether a backup directory exists.
+
 ## `backup-check`
 
 Checks that critical files have backup candidates.
@@ -60,4 +76,3 @@ agent-context-ops council-log \
   --panel claude=claude.md \
   --final final.md
 ```
-

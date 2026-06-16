@@ -6,6 +6,12 @@
 - Add a safe sample configuration. Done.
 - Document what must never be exported. Done.
 
+## v0.1.1 - Public polish
+
+- Add `doctor` command for setup and sharing readiness. Done.
+- Add README demo assets. Done.
+- Polish quick start and command table. Done.
+
 ## v0.2 - Context pack generator
 
 - Generate a Markdown handoff from configured project paths. Done in first CLI.

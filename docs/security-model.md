@@ -9,6 +9,8 @@ That makes context generation a security boundary.
 - SSH keys and PEM/key files are skipped.
 - Secret-looking strings are redacted from included text.
 - Common heavy/private folders are excluded.
+- Absolute local root paths are hidden from context packs unless
+  `--show-root-path` is explicitly used.
 
 ## Not guaranteed
 
@@ -22,4 +24,3 @@ them outside a trusted environment.
 - Keep private notes outside public repositories.
 - Add project-specific excludes.
 - Review generated handoffs before pasting them into third-party tools.
-

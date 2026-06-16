@@ -6,20 +6,23 @@
 
 Stop pasting messy context between AI coding agents.
 
-Agent Context Ops is an open-source toolkit for keeping AI coding agents grounded
-in real project context.
+Agent Context Ops is a small, file-based CLI for keeping AI coding agents grounded
+in real project context without leaking secrets.
 
-Agent Context Ops helps maintainers share durable context across tools such as Codex,
-Claude Code, Hermes, Obsidian and local knowledge graphs without copying private
-conversation history by hand.
+It helps maintainers hand work between tools such as Codex, Claude Code, Hermes,
+Obsidian and local knowledge graphs without copying private chat history by hand.
 
-## What it does
+![Agent Context Ops demo](docs/assets/demo.gif)
 
-- Generates clean handoff files for another AI agent or coding session.
-- Keeps operational notes, reports and decisions in Markdown.
-- Provides a safe pattern for indexing code/project context with Graphify-style outputs.
-- Encourages backup-first maintenance workflows.
-- Separates public agent context from private secrets, `.env` files and commercial data.
+## Use cases
+
+- Generate a clean Markdown handoff before moving work to another agent.
+- Run a quick readiness check before sharing context.
+- Scan for secret-looking content in exported files.
+- Check whether a local knowledge graph is stale.
+- Verify that critical files have recent backups.
+- Write lightweight operational notes to an Obsidian vault.
+- Store read-only multi-agent review logs.
 
 ## Why it exists
 
@@ -37,16 +40,6 @@ This project is designed for real-world maintainer workflows:
 - safer handoffs between coding agents;
 - project memory that lives in the repo, not only in chat history.
 
-## Planned modules
-
-- `context-pack`: builds a compact project state handoff.
-- `obsidian-log`: writes structured Markdown reports to an Obsidian vault.
-- `graph-check`: verifies whether the local knowledge graph is fresh.
-- `backup-check`: checks whether critical files have recent backups.
-- `agent-council`: records multi-agent reviews without giving agents write access.
-- `scan-secrets`: scans for secret-looking content before sharing context.
-- `init`: creates a minimal context structure in another repository.
-
 ## Install
 
 From a local checkout:
@@ -57,13 +50,28 @@ pip install -e .
 
 ## Quick start
 
+Initialize a project:
+
+```bash
+agent-context-ops init --root .
+```
+
 Generate a redacted handoff for another AI agent:
 
 ```bash
 agent-context-ops context-pack --root . --output handoff.md
 ```
 
+By default, the handoff hides your absolute local root path. Use
+`--show-root-path` only for same-machine handoffs that need the exact path.
+
 See a sample output: [`examples/output/context-pack.md`](examples/output/context-pack.md).
+
+Run a readiness check:
+
+```bash
+agent-context-ops doctor --root .
+```
 
 Check if a local knowledge graph is stale:
 
@@ -98,6 +106,19 @@ Short alias:
 aco context-pack --root .
 ```
 
+## Commands
+
+| Command | Purpose |
+| --- | --- |
+| `init` | Create `agent-context-ops.toml`, `AGENTS.md`, and handoff folders. |
+| `doctor` | Check context readiness before sharing work with another agent. |
+| `context-pack` | Generate a redacted Markdown handoff. |
+| `scan-secrets` | Find secret-looking content before exporting context. |
+| `graph-check` | Detect whether a local `graph.json` is stale. |
+| `backup-check` | Confirm critical files have recent backup candidates. |
+| `obsidian-log` | Write a Markdown note into an Obsidian vault. |
+| `council-log` | Store read-only multi-agent review outputs. |
+
 ## Development smoke test
 
 ```bash
@@ -115,5 +136,5 @@ make scan
 
 ## Status
 
-`v0.1.0` is the first public release: a clean, generic CLI with examples, tests,
-CI, security docs, and no private project assumptions.
+`v0.1.1` is an early public release focused on safe context handoffs, preflight
+checks, docs and examples. The project is intentionally small and local-first.

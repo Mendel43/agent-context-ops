@@ -7,6 +7,7 @@ import sys
 from .backup_check import check_backups, render_backup_report
 from .context_pack import ContextConfig, build_context_pack
 from .council_log import write_council_log
+from .doctor import render_doctor_report, run_doctor
 from .graph_check import check_graph, render_graph_report
 from .init_project import init_project
 from .obsidian_log import write_obsidian_note
@@ -29,6 +30,7 @@ def build_parser() -> argparse.ArgumentParser:
     context.add_argument("--config", help="Optional TOML config")
     context.add_argument("--output", help="Write to file instead of stdout")
     context.add_argument("--include", action="append", help="Extra include path, relative to root")
+    context.add_argument("--show-root-path", action="store_true", help="Include the absolute root path in output")
     context.set_defaults(func=cmd_context_pack)
 
     backup = sub.add_parser("backup-check", help="Check whether critical files have recent backups")
@@ -63,6 +65,12 @@ def build_parser() -> argparse.ArgumentParser:
     scan.add_argument("--output", help="Write report to file")
     scan.set_defaults(func=cmd_scan_secrets)
 
+    doctor = sub.add_parser("doctor", help="Run a local readiness check before sharing context")
+    doctor.add_argument("--root", default=argparse.SUPPRESS, help="Project root")
+    doctor.add_argument("--config", help="Optional TOML config")
+    doctor.add_argument("--output", help="Write report to file")
+    doctor.set_defaults(func=cmd_doctor)
+
     council = sub.add_parser("council-log", help="Record a read-only multi-agent review")
     council.add_argument("--output-dir", default="council-runs")
     council.add_argument("--question", required=True)
@@ -83,6 +91,8 @@ def cmd_context_pack(args: argparse.Namespace) -> int:
     config = ContextConfig.from_file(Path(args.config) if args.config else None)
     if args.include:
         config.include.extend(args.include)
+    if args.show_root_path:
+        config.show_absolute_root = True
     output = build_context_pack(root, config)
     _emit(output, args.output)
     return 0
@@ -124,6 +134,13 @@ def cmd_scan_secrets(args: argparse.Namespace) -> int:
     output = render_scan_report(root, findings)
     _emit(output, args.output)
     return 0 if not findings else 2
+
+
+def cmd_doctor(args: argparse.Namespace) -> int:
+    checks = run_doctor(Path(args.root), Path(args.config) if args.config else None)
+    output = render_doctor_report(checks)
+    _emit(output, args.output)
+    return 2 if any(check.is_failure for check in checks) else 0
 
 
 def cmd_council_log(args: argparse.Namespace) -> int:
