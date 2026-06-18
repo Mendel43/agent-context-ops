@@ -1,5 +1,13 @@
 # CLI Reference
 
+## Version
+
+Print the installed CLI version:
+
+```bash
+agent-context-ops --version
+```
+
 ## `context-pack`
 
 Generates a redacted Markdown handoff.

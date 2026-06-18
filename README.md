@@ -48,6 +48,12 @@ From a local checkout:
 pip install -e .
 ```
 
+Verify the installation:
+
+```bash
+agent-context-ops --version
+```
+
 ## Quick start
 
 Initialize a project:
@@ -136,5 +142,6 @@ make scan
 
 ## Status
 
-`v0.1.1` is an early public release focused on safe context handoffs, preflight
-checks, docs and examples. The project is intentionally small and local-first.
+`v0.1.2` is an early public release focused on safe context handoffs, preflight
+checks, cross-platform verification, docs and examples. The project is
+intentionally small and local-first.

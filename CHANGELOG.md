@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.1.2 - 2026-06-18
+
+Small compatibility and release-quality update.
+
+### Added
+
+- `--version` support for both `agent-context-ops` and `aco`.
+- Cross-platform CI coverage for Windows and Linux on Python 3.11 and 3.12.
+- CLI version regression test.
+- v0.1.2 release notes.
+
+### Changed
+
+- Made the smoke-test command portable across supported CI platforms.
+- Updated the public roadmap with the v0.1.2 maintenance milestone.
+
 ## v0.1.1 - 2026-06-16
 
 Documentation and demo polish for the first public release.

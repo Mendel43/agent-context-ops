@@ -12,6 +12,13 @@
 - Add README demo assets. Done.
 - Polish quick start and command table. Done.
 
+## v0.1.2 - Compatibility pass
+
+- Add a CLI version flag. Done.
+- Test clean editable installs on Windows and Linux. Done.
+- Expand CI to Python 3.11 and 3.12. Done.
+- Keep examples and release documentation aligned. Done.
+
 ## v0.2 - Context pack generator
 
 - Generate a Markdown handoff from configured project paths. Done in first CLI.

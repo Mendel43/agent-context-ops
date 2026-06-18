@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 import sys
 
+from . import __version__
 from .backup_check import check_backups, render_backup_report
 from .context_pack import ContextConfig, build_context_pack
 from .council_log import write_council_log
@@ -22,6 +23,7 @@ def main(argv: list[str] | None = None) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="agent-context-ops")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     parser.add_argument("--root", default=".", help="Project root")
     sub = parser.add_subparsers(dest="command", required=True)
 
