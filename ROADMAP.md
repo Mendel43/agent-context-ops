@@ -25,6 +25,13 @@
 - Include recent git status, command references and selected docs. Done in first CLI.
 - Redact common secret patterns. Done in first CLI.
 
+## v0.2.0 - Smart context packs
+
+- Add per-agent profiles (`generic`, `codex`, `claude`, `hermes`). Done.
+- Embed a machine-readable manifest with a sha256 per file. Done.
+- Summarise included files by area. Done.
+- Diff a pack against a previous one with `--compare`. Done.
+
 ## v0.3 - Obsidian logger
 
 - Write reports to an Obsidian-compatible folder structure. Done in first CLI.

@@ -6,7 +6,15 @@ import sys
 
 from . import __version__
 from .backup_check import check_backups, render_backup_report
-from .context_pack import ContextConfig, build_context_pack
+from .context_pack import (
+    DEFAULT_PROFILE,
+    ContextConfig,
+    build_context_pack,
+    diff_manifests,
+    extract_manifest,
+    profile_names,
+    render_diff,
+)
 from .council_log import write_council_log
 from .doctor import render_doctor_report, run_doctor
 from .graph_check import check_graph, render_graph_report
@@ -30,8 +38,15 @@ def build_parser() -> argparse.ArgumentParser:
     context = sub.add_parser("context-pack", help="Generate a redacted Markdown handoff")
     context.add_argument("--root", default=argparse.SUPPRESS, help="Project root")
     context.add_argument("--config", help="Optional TOML config")
+    context.add_argument(
+        "--profile",
+        choices=profile_names(),
+        default=DEFAULT_PROFILE,
+        help="Agent preset (ignored when --config is given)",
+    )
     context.add_argument("--output", help="Write to file instead of stdout")
     context.add_argument("--include", action="append", help="Extra include path, relative to root")
+    context.add_argument("--compare", help="Previous pack file to diff against")
     context.add_argument("--show-root-path", action="store_true", help="Include the absolute root path in output")
     context.set_defaults(func=cmd_context_pack)
 
@@ -90,14 +105,28 @@ def build_parser() -> argparse.ArgumentParser:
 
 def cmd_context_pack(args: argparse.Namespace) -> int:
     root = Path(args.root)
-    config = ContextConfig.from_file(Path(args.config) if args.config else None)
+    if args.config:
+        config = ContextConfig.from_file(Path(args.config))
+    else:
+        config = ContextConfig.for_profile(args.profile)
     if args.include:
         config.include.extend(args.include)
     if args.show_root_path:
         config.show_absolute_root = True
     output = build_context_pack(root, config)
+    if args.compare:
+        output = _append_diff(output, Path(args.compare))
     _emit(output, args.output)
     return 0
+
+
+def _append_diff(output: str, previous: Path) -> str:
+    old = extract_manifest(previous.read_text(encoding="utf-8"))
+    new = extract_manifest(output)
+    if old is None or new is None:
+        note = "- Could not read a manifest from the comparison file.\n"
+        return output.rstrip() + "\n\n## Changes since previous pack\n\n" + note
+    return output.rstrip() + "\n\n" + render_diff(diff_manifests(old, new))
 
 
 def cmd_backup_check(args: argparse.Namespace) -> int:

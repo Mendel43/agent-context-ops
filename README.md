@@ -142,6 +142,7 @@ make scan
 
 ## Status
 
-`v0.1.2` is an early public release focused on safe context handoffs, preflight
-checks, cross-platform verification, docs and examples. The project is
-intentionally small and local-first.
+`v0.2.0` adds smart context packs: per-agent profiles, a machine-readable
+manifest, a per-area summary and a diff against a previous pack. It builds on the
+v0.1.x foundation of safe handoffs, preflight checks and cross-platform
+verification. The project is intentionally small and local-first.

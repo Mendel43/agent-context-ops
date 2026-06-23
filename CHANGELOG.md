@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.2.0 - 2026-06-22
+
+Smart context packs: the handoff now adapts to the agent and can be compared run over run.
+
+### Added
+
+- Agent profiles for `context-pack`: `generic`, `codex`, `claude` and `hermes`, each with its own include set and byte budget. Select with `--profile` or the `profile` key in config.
+- Machine-readable manifest embedded in every pack (profile, file count, total bytes, and a sha256 per file).
+- Per-area summary table grouping included files by top-level directory.
+- `--compare PREVIOUS_PACK` flag that diffs the new pack against a prior one and reports added, removed and changed files.
+- Tests covering profiles, manifest extraction, area grouping and diffing.
+
+### Changed
+
+- `context-pack` output now adds `Profile`, `Files`, `## Areas` and `## Manifest` sections alongside the existing git and file sections.
+
 ## v0.1.2 - 2026-06-18
 
 Small compatibility and release-quality update.

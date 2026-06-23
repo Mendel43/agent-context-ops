@@ -20,6 +20,41 @@ By default, `context-pack` hides the absolute local root path and reports only
 the project folder name. Use `--show-root-path` only when the receiving agent
 needs the exact local path on the same machine.
 
+### Profiles
+
+Pick an agent preset with `--profile`. Each profile chooses which paths to
+include and how large the pack may grow:
+
+- `generic` (default): balanced handoff that fits any agent.
+- `codex`: code-heavy pack that also includes `src/` and `tests/`.
+- `claude`: intent and docs pack centred on `CLAUDE.md` and docs.
+- `hermes`: lean handoff with a small byte budget for a cheap worker model.
+
+```bash
+agent-context-ops context-pack --root . --profile codex --output handoff.md
+```
+
+When `--config` is supplied it takes precedence; set `profile` inside the config
+file instead.
+
+### Manifest and areas
+
+Every pack embeds a machine-readable manifest (profile, file count, total bytes
+and a sha256 per file) and a `## Areas` table that groups included files by
+top-level directory.
+
+### Comparing packs
+
+Diff a new pack against a previous one to see what changed:
+
+```bash
+agent-context-ops context-pack --root . --profile codex \
+  --compare previous-handoff.md --output handoff.md
+```
+
+The output gains a `## Changes since previous pack` section listing added,
+removed and changed files.
+
 ## `doctor`
 
 Runs a local readiness check before sharing context with another agent.

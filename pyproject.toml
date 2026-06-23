@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agent-context-ops"
-version = "0.1.2"
+version = "0.2.0"
 description = "Safe context handoffs, Obsidian logs, backup checks, and graph freshness checks for AI-assisted maintainers."
 readme = "README.md"
 requires-python = ">=3.11"
