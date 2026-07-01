@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.1 - 2026-07-01
+
+Patch release for release hygiene and package metadata.
+
+### Changed
+
+- Bumped package version to `0.2.1`.
+- Added release notes for the patch release.
+- Republished release history after removing an unintended co-author trailer from `v0.2.0`.
+
 ## v0.2.0 - 2026-06-22
 
 Smart context packs: the handoff now adapts to the agent and can be compared run over run.

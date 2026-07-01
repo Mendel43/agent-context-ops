@@ -32,6 +32,11 @@
 - Summarise included files by area. Done.
 - Diff a pack against a previous one with `--compare`. Done.
 
+## v0.2.1 - Release hygiene
+
+- Remove unintended co-author metadata from the v0.2.0 release commit. Done.
+- Publish a patch release with refreshed package metadata. Done.
+
 ## v0.3 - Obsidian logger
 
 - Write reports to an Obsidian-compatible folder structure. Done in first CLI.

@@ -142,7 +142,7 @@ make scan
 
 ## Status
 
-`v0.2.0` adds smart context packs: per-agent profiles, a machine-readable
-manifest, a per-area summary and a diff against a previous pack. It builds on the
-v0.1.x foundation of safe handoffs, preflight checks and cross-platform
-verification. The project is intentionally small and local-first.
+`v0.2.1` is the current patch release. It keeps the smart context-pack work from
+`v0.2.0` and tightens release metadata before the next feature milestone. The
+project is intentionally small, local-first and built around safe handoffs,
+preflight checks and cross-platform verification.
